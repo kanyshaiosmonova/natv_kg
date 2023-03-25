@@ -33,43 +33,33 @@ class _RowButtonWidgetState extends State<RowButtonWidget> {
       children: List.generate(
         widget.labels.length,
         (index) => index == selectedIndex
-            ? _RowButtonItem.selected(
-                options: [widget.labels[index]],
-              )
+            ? _RowButtonItem.selected(label: widget.labels[index])
             : GestureDetector(
                 onTap: () {
-                  setState(() {
-                    selectedIndex = index;
-                  });
-                  if (index == 0) {
-                    Navigator.popUntil(context, ModalRoute.withName('/'));
-                  } else if (index == 1) {
-                    Navigator.pushNamed(context, '/banner');
-                  }
+                  selectedIndex = index;
+                  widget.onChange(index);
+                  setState(() {});
                 },
-                child: _RowButtonItem(
-                  options: [widget.labels[index]],
-                ),
-              ),
+                child: _RowButtonItem(label: widget.labels[index])),
       ),
     );
   }
 }
 
 class _RowButtonItem extends StatelessWidget {
-  final List<String> options;
+  final String label;
   final bool selected;
   const _RowButtonItem({
-    required this.options,
+    required this.label,
     this.selected = false,
     Key? key,
   }) : super(key: key);
 
   factory _RowButtonItem.selected({
-    required List<String> options,
+    required String label,
   }) =>
       _RowButtonItem(
-        options: options,
+        label: label,
         selected: true,
       );
 
@@ -90,7 +80,7 @@ class _RowButtonItem extends StatelessWidget {
             ),
           ),
           child: Text(
-            options.join('\n'),
+            label,
             style: TextStyle(
               color: selected ? AppColors.red : AppColors.gray,
             ),

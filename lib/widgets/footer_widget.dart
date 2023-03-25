@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:natv_kg/core/themes/colors.dart';
 import 'package:natv_kg/screens/about_project.dart';
-import 'package:natv_kg/screens/filling_form.dart';
+
 import 'package:natv_kg/screens/legal_entities.dart';
 import 'package:natv_kg/screens/payment_methods.dart';
-import 'package:natv_kg/screens/public_agreement.dart';
+
 import 'package:natv_kg/screens/question_answer.dart';
-import 'package:natv_kg/screens/video_instruction.dart';
 
 class FooterWidget extends StatelessWidget {
   const FooterWidget({Key? key}) : super(key: key);
@@ -84,47 +83,17 @@ class FooterWidget extends StatelessWidget {
                     color: AppColors.red)),
           ),
           const SizedBox(height: 8),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const VideoInstructionWidget()),
-              );
-            },
-            child: const Text('Видеоинструкция по размещению',
-                style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: AppColors.red)),
-          ),
+          const Text('Видеоинструкция по размещению',
+              style: TextStyle(
+                  decoration: TextDecoration.underline, color: AppColors.red)),
           const SizedBox(height: 8),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const PublicAgreementWidget()),
-              );
-            },
-            child: const Text('Договор публичной оферты',
-                style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: AppColors.red)),
-          ),
+          const Text('Договор публичной оферты',
+              style: TextStyle(
+                  decoration: TextDecoration.underline, color: AppColors.red)),
           const SizedBox(height: 8),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const FillingFormWidget()),
-              );
-            },
-            child: const Text('Правила заполнения тектса',
-                style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: AppColors.red)),
-          ),
+          const Text('Правила заполнения тектса',
+              style: TextStyle(
+                  decoration: TextDecoration.underline, color: AppColors.red)),
           const SizedBox(height: 20),
           const Text('По вопросам сотрудничества: info@natvkg'),
           const SizedBox(height: 20),

@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            // const ChannelWidget(),
+            const ChannelWidget(),
             const SizedBox(height: 10),
             const FooterWidget(),
           ],

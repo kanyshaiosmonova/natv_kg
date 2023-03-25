@@ -19,7 +19,7 @@ class BannerWidget extends StatelessWidget {
           scrollDirection: Axis.vertical,
           children: [
             RowButtonWidget(
-              labels: const [
+              labels: [
                 'РАЗМЕЩЕНИЕ СТРОЧНОГО \nОБЪЯВЛЕНИЯ',
                 'РАЗМЕЩЕНИЕ БАННЕРНОЙ \nРЕКЛАМЫ'
               ],
