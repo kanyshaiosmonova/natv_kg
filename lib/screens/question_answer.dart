@@ -222,7 +222,7 @@ class QuestionWidget extends StatelessWidget {
         Text(number),
         const SizedBox(width: 10),
         Text(label, style: AppTextStyles.fBolds18),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
       ],
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:natv_kg/core/themes/colors.dart';
+import 'package:natv_kg/main.dart';
+import 'package:natv_kg/screens/placement_of_banner.dart';
 
 class RowButtonWidget extends StatefulWidget {
   final List<String> labels;
@@ -31,33 +33,43 @@ class _RowButtonWidgetState extends State<RowButtonWidget> {
       children: List.generate(
         widget.labels.length,
         (index) => index == selectedIndex
-            ? _RowButtonItem.selected(label: widget.labels[index])
+            ? _RowButtonItem.selected(
+                options: [widget.labels[index]],
+              )
             : GestureDetector(
                 onTap: () {
-                  selectedIndex = index;
-                  widget.onChange(index);
-                  setState(() {});
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                  if (index == 0) {
+                    Navigator.popUntil(context, ModalRoute.withName('/'));
+                  } else if (index == 1) {
+                    Navigator.pushNamed(context, '/banner');
+                  }
                 },
-                child: _RowButtonItem(label: widget.labels[index])),
+                child: _RowButtonItem(
+                  options: [widget.labels[index]],
+                ),
+              ),
       ),
     );
   }
 }
 
 class _RowButtonItem extends StatelessWidget {
-  final String label;
+  final List<String> options;
   final bool selected;
   const _RowButtonItem({
-    required this.label,
+    required this.options,
     this.selected = false,
     Key? key,
   }) : super(key: key);
 
   factory _RowButtonItem.selected({
-    required String label,
+    required List<String> options,
   }) =>
       _RowButtonItem(
-        label: label,
+        options: options,
         selected: true,
       );
 
@@ -78,7 +90,7 @@ class _RowButtonItem extends StatelessWidget {
             ),
           ),
           child: Text(
-            label,
+            options.join('\n'),
             style: TextStyle(
               color: selected ? AppColors.red : AppColors.gray,
             ),

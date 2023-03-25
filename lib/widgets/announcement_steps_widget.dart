@@ -13,24 +13,22 @@ class AnnouncementStepsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              border: Border.all(
-                color: AppColors.red,
-                width: 2.0,
-              ),
+    return Row(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+            border: Border.all(
+              color: AppColors.red,
+              width: 2.0,
             ),
-            child: Text(stepNumberText),
           ),
-          Expanded(child: Text(announcementText)),
-        ],
-      ),
+          child: Text(stepNumberText),
+        ),
+        Expanded(child: Text(announcementText)),
+      ],
     );
   }
 }

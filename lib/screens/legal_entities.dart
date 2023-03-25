@@ -14,7 +14,7 @@ class LegalEntitiesWidget extends StatelessWidget {
         color: AppColors.white,
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
         child: ListView(
-          children: [
+          children: const [
             Text(
               'РАЗМЕЩЕНИЕ \nРЕКЛАМЫ ДЛЯ \nЮРИДИЧЕСКИХ ЛИЦ',
               style: AppTextStyles.header1,
@@ -44,7 +44,7 @@ class LegalEntitiesWidget extends StatelessWidget {
             ),
             SizedBox(height: 25),
             Text(
-              'Банк: Филиал ОАО «Оптима Банк» в г. \тБишкек №5, БИК: 109016 ',
+              'Банк: Филиал ОАО «Оптима Банк» в г. тБишкек №5, БИК: 109016 ',
               style: AppTextStyles.fNormals19,
             ),
             SizedBox(height: 25),
