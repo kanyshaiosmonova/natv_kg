@@ -4,6 +4,7 @@ import 'package:natv_kg/widgets/announcement_steps_widget.dart';
 import 'package:natv_kg/widgets/announcement_textfield.dart';
 import 'package:natv_kg/widgets/download_file.dart';
 import 'package:natv_kg/widgets/footer_widget.dart';
+import 'package:natv_kg/widgets/logoWidget.dart';
 import 'package:natv_kg/widgets/row_button_widget.dart';
 
 void main() {
@@ -42,10 +43,7 @@ class MyAppState extends State<MyApp> {
                 });
               },
             ),
-            // Container(
-            //     margin: const EdgeInsets.all(10),
-            //     child: Image.asset('assets/images/logo.png',
-            //         width: 100, height: 100)),
+            const LogoWidget(),
             if (isAnnouncementSelected) ...[
               const SizedBox(height: 10),
               const AnnouncementTextField(),

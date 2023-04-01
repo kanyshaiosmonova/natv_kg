@@ -25,7 +25,11 @@ class AnnouncementStepsWidget extends StatelessWidget {
               width: 2.0,
             ),
           ),
-          child: Text(stepNumberText),
+          child: Text(
+            stepNumberText,
+            style: const TextStyle(
+                color: AppColors.red, fontWeight: FontWeight.bold),
+          ),
         ),
         Expanded(child: Text(announcementText)),
       ],
