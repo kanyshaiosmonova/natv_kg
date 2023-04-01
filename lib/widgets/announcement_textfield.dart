@@ -32,7 +32,7 @@ class _AnnouncementTextFieldState extends State<AnnouncementTextField> {
             flex: 1,
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               color: AppColors.red,
               child: Column(children: [
                 const Text(

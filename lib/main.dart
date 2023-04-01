@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:natv_kg/core/themes/colors.dart';
 import 'package:natv_kg/widgets/announcement_steps_widget.dart';
 import 'package:natv_kg/widgets/announcement_textfield.dart';
+import 'package:natv_kg/widgets/contact_info_form.dart';
 import 'package:natv_kg/widgets/download_file.dart';
 import 'package:natv_kg/widgets/footer_widget.dart';
 import 'package:natv_kg/widgets/logoWidget.dart';
@@ -69,7 +70,8 @@ class MyAppState extends State<MyApp> {
                 ],
               ),
             ),
-            // const SizedBox(height: 10),
+
+            const ContactInfoForm(),
             // const ChannelWidget(),
             const SizedBox(height: 10),
             const FooterWidget(),
