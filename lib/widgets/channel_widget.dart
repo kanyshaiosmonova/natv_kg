@@ -26,8 +26,10 @@ class _ChannelWidgetState extends State<ChannelWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
+    return SizedBox(
+      width: 250,
+      height: 250,
+      child: Row(
         children: [
           Expanded(
             child: Column(

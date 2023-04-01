@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:natv_kg/core/themes/colors.dart';
-import 'package:natv_kg/screens/placement_of_banner.dart';
 import 'package:natv_kg/widgets/announcement_steps_widget.dart';
-import 'package:natv_kg/widgets/channel_widget.dart';
+import 'package:natv_kg/widgets/announcement_textfield.dart';
+import 'package:natv_kg/widgets/download_file.dart';
 import 'package:natv_kg/widgets/footer_widget.dart';
 import 'package:natv_kg/widgets/row_button_widget.dart';
 
@@ -10,8 +10,15 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  MyAppState createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  bool isAnnouncementSelected = true;
 
   @override
   Widget build(BuildContext context) {
@@ -29,52 +36,26 @@ class MyApp extends StatelessWidget {
                 'РАЗМЕЩЕНИЕ СТРОЧНОГО \nОБЪЯВЛЕНИЯ',
                 'РАЗМЕЩЕНИЕ БАННЕРНОЙ \nРЕКЛАМЫ'
               ],
-              onChange: (updatedIndex) {},
+              onChange: (updatedIndex) {
+                setState(() {
+                  isAnnouncementSelected = updatedIndex == 0;
+                });
+              },
             ),
-            Image.asset('assets/images/logo.png', width: 100, height: 100),
+            // Container(
+            //     margin: const EdgeInsets.all(10),
+            //     child: Image.asset('assets/images/logo.png',
+            //         width: 100, height: 100)),
+            if (isAnnouncementSelected) ...[
+              const SizedBox(height: 10),
+              const AnnouncementTextField(),
+            ] else ...[
+              const SizedBox(height: 10),
+              const DownloadFile(),
+            ],
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 70, vertical: 30),
-              width: 200,
-              height: 200,
-              color: AppColors.white,
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      color: AppColors.red,
-                      child: Center(
-                        child: Text(
-                          'Введите текст объявления',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      child: Center(
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(bottom: 40),
-                            border: InputBorder.none,
-                            hintText: 'Скидки! Бутик женской одежды!',
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              margin: const EdgeInsets.all(20),
+              width: double.infinity,
               child: Column(
                 children: const [
                   AnnouncementStepsWidget(
@@ -90,16 +71,13 @@ class MyApp extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-            const ChannelWidget(),
+            // const SizedBox(height: 10),
+            // const ChannelWidget(),
             const SizedBox(height: 10),
             const FooterWidget(),
           ],
         ),
       ),
-      routes: {
-        '/banner': (context) => BannerWidget(),
-      },
     );
   }
 }

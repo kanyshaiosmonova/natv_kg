@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:natv_kg/core/themes/colors.dart';
-import 'package:natv_kg/widgets/announcement_steps_widget.dart';
-import 'package:natv_kg/widgets/footer_widget.dart';
+
 import 'package:natv_kg/widgets/row_button_widget.dart';
 
 class BannerWidget extends StatelessWidget {
@@ -19,7 +18,7 @@ class BannerWidget extends StatelessWidget {
           scrollDirection: Axis.vertical,
           children: [
             RowButtonWidget(
-              labels: [
+              labels: const [
                 'РАЗМЕЩЕНИЕ СТРОЧНОГО \nОБЪЯВЛЕНИЯ',
                 'РАЗМЕЩЕНИЕ БАННЕРНОЙ \nРЕКЛАМЫ'
               ],

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:natv_kg/core/themes/colors.dart';
-import 'package:natv_kg/main.dart';
-import 'package:natv_kg/screens/placement_of_banner.dart';
 
 class RowButtonWidget extends StatefulWidget {
   final List<String> labels;
@@ -66,24 +64,21 @@ class _RowButtonItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            color: selected ? AppColors.white : AppColors.backgroundColor,
-            border: Border(
-              top: BorderSide(
-                color: selected ? AppColors.red : AppColors.gray,
-                width: 5.0,
-              ),
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: selected ? AppColors.white : AppColors.backgroundColor,
+          border: Border(
+            top: BorderSide(
+              color: selected ? AppColors.red : AppColors.gray,
+              width: 5.0,
             ),
           ),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: selected ? AppColors.red : AppColors.gray,
-            ),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: selected ? AppColors.red : AppColors.gray,
           ),
         ),
       ),
