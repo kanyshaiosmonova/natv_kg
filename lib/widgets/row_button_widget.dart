@@ -64,21 +64,24 @@ class _RowButtonItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          color: selected ? AppColors.white : AppColors.backgroundColor,
-          border: Border(
-            top: BorderSide(
-              color: selected ? AppColors.red : AppColors.gray,
-              width: 5.0,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: selected ? AppColors.white : AppColors.backgroundColor,
+            border: Border(
+              top: BorderSide(
+                color: selected ? AppColors.red : AppColors.gray,
+                width: 5.0,
+              ),
             ),
           ),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: selected ? AppColors.red : AppColors.gray,
+          child: Text(
+            label,
+            style: TextStyle(
+              color: selected ? AppColors.red : AppColors.gray,
+            ),
           ),
         ),
       ),

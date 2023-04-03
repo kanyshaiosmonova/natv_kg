@@ -13,6 +13,7 @@ class DownloadFile extends StatefulWidget {
 }
 
 class DownloadFileState extends State<DownloadFile> {
+  // ignore: avoid_init_to_null
   late File? _image = null;
 
   final picker = ImagePicker();
@@ -156,8 +157,9 @@ class DownloadFileState extends State<DownloadFile> {
               child: _buildPreview(),
             ),
           ),
+          const SizedBox(height: 10),
           const Text(
-              'Рекомендуемый размер файла 720х576 пикс. или \nсоотношение сторон 4:3.\nОграничение по размеру файла 3 Мб. К закачке\n допустимы графические форматы PNG, JPG, GIF.',
+              'Рекомендуемый размер файла 720х576 пикс. или соотношение сторон 4:3.\nОграничение по размеру файла 3 Мб. К закачке допустимы графические форматы PNG, JPG, GIF.',
               style: TextStyle(fontSize: 14))
         ],
       ),

@@ -22,15 +22,40 @@ class _ContactInfoFormState extends State<ContactInfoForm> {
       ),
       width: double.infinity,
       padding: const EdgeInsets.all(30),
-      child: Column(children: const [
-        FormWidget(text: 'КОНТАКТНЫЙ НОМЕР', labelText: 'ПРИМЕР: 0555 123 456'),
-        SizedBox(height: 20),
-        FormWidget(text: 'E-MAIL', labelText: 'primer@mail.com'),
-        SizedBox(height: 20),
-        FormWidget(
+      child: Column(children: [
+        const FormWidget(
+            text: 'КОНТАКТНЫЙ НОМЕР', labelText: 'ПРИМЕР: 0555 123 456'),
+        const SizedBox(height: 20),
+        const FormWidget(text: 'E-MAIL', labelText: 'primer@mail.com'),
+        const SizedBox(height: 20),
+        const FormWidget(
             text: 'УКАЖИТЕ ФАМИЛИЮ И ИМЯ',
             labelText: 'Ф.И.О./название организации'),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
+        const Text(
+            '*Поля не обязательны для заполнения. Укажите номер телефона и мы отправим Вам код для оплаты SMS сообщением.\n*Оплатите любым удобным способом!'),
+        const SizedBox(height: 20),
+        SizedBox(
+          height: 50,
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: const RoundedRectangleBorder(
+                side: BorderSide(width: 0.5, color: Colors.grey),
+              ),
+              shadowColor: AppColors.border,
+              backgroundColor: Colors.white,
+            ),
+            onPressed: () {
+              // implement your upload logic here
+            },
+            child: const Text('РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ',
+                style: TextStyle(
+                    color: AppColors.red,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18)),
+          ),
+        ),
       ]),
     );
   }

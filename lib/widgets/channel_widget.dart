@@ -1,90 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:natv_kg/blocs/channel_bloc/channel_bloc.dart';
+import 'package:natv_kg/core/themes/colors.dart';
+import 'package:natv_kg/models/channels.dart';
+import 'package:natv_kg/widgets/date_selector.dart';
 
-class ChannelWidget extends StatefulWidget {
+class ChannelWidget extends StatelessWidget {
   const ChannelWidget({Key? key}) : super(key: key);
 
   @override
-  State<ChannelWidget> createState() => _ChannelWidgetState();
-}
-
-class _ChannelWidgetState extends State<ChannelWidget> {
-  DateTime? _selectedDate;
-
-  void _showDatePicker() async {
-    final picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2015, 8),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null && picked != _selectedDate) {
-      setState(() {
-        _selectedDate = picked;
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 250,
-      height: 250,
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                Container(
-                  height: 150,
-                  width: double.infinity,
-                  color: Colors.grey[200],
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/image_name.png',
-                        height: 80,
-                        width: 80,
-                      ),
-                      const SizedBox(height: 10),
-                      const Text('Image Name'),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                Expanded(
-                  child: Container(),
-                ),
-                GestureDetector(
-                  onTap: _showDatePicker,
-                  child: Container(
-                    height: 50,
-                    width: double.infinity,
-                    color: Colors.grey[200],
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.calendar_today),
-                        const SizedBox(width: 10),
-                        Text(
-                          _selectedDate == null
-                              ? 'Select Date'
-                              : 'Selected Date: ${_selectedDate!.toLocal()}'
-                                  .split(' ')[0],
-                        ),
-                      ],
+    return Container(
+      height: 500,
+      color: Colors.white,
+      child: BlocProvider(
+        create: (_) => ChannelBloc()..fetchChannels(),
+        child: BlocBuilder<ChannelBloc, List<Channel>>(
+          builder: (context, channels) {
+            if (channels.isNotEmpty) {
+              return Column(
+                children: [
+                  Flexible(
+                    child: ListView.builder(
+                      itemCount: channels.length,
+                      itemBuilder: (context, index) {
+                        final channel = channels[index];
+                        return Column(
+                          key: ValueKey(channel.id),
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.all(15),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: AppColors.border,
+                                      width: 0.5,
+                                    ),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  child: Image.network(channel.logo),
+                                ),
+                                const SizedBox(width: 10),
+                                Text(channel.channelName),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              '${channel.pricePerLetter}сом',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: AppColors.gray,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            DateSelector(
+                              onDateSelected: (pickedDate) {},
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ],
+                  if (channels.length > 10)
+                    ElevatedButton(
+                      onPressed: () {
+                        context.read<ChannelBloc>().showMoreChannels();
+                      },
+                      child: const Text('Больше каналов'),
+                    ),
+                ],
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       ),
     );
   }

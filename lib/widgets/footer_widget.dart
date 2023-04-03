@@ -17,7 +17,7 @@ class FooterWidget extends StatelessWidget {
         border: Border(
           top: BorderSide(
             width: 2,
-            color: Colors.yellow,
+            color: AppColors.gray,
           ),
         ),
         color: AppColors.backgroundColor,
