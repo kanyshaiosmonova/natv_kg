@@ -48,14 +48,17 @@ class Channel {
   }
 
   static Future<List<Channel>> getChannels() async {
-    final response = await http.get(Uri.parse('https://app1.megacom.kg:9090/test_task/api/v1/channel/list'));
+    final response = await http.get(Uri.parse(
+        'https://app1.megacom.kg:9090/test_task/api/v1/channel/list'));
     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
 
     List<Channel> channels = [];
 
     for (var json in parsed) {
-      if (json['channelName'] != null && json['channelName'].isNotEmpty &&
-          json['logo'] != null && json['logo'].isNotEmpty) {
+      if (json['channelName'] != null &&
+          json['channelName'].isNotEmpty &&
+          json['logo'] != null &&
+          json['logo'].isNotEmpty) {
         channels.add(Channel.fromJson(json));
       }
     }

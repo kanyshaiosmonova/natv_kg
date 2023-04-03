@@ -43,7 +43,12 @@ class ChannelWidget extends StatelessWidget {
                                     horizontal: 10,
                                     vertical: 5,
                                   ),
-                                  child: Image.network(channel.logo),
+                                  child: channel.logo.isNotEmpty
+                                      ? Image.network(channel.logo)
+                                      : const Placeholder(
+                                          fallbackHeight: 70,
+                                          fallbackWidth: 70,
+                                        ),
                                 ),
                                 const SizedBox(width: 10),
                                 Text(channel.channelName),
