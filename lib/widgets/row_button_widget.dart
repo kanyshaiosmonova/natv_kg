@@ -3,11 +3,11 @@ import 'package:natv_kg/core/themes/colors.dart';
 
 class RowButtonWidget extends StatefulWidget {
   final List<String> labels;
-  final int initialIndex;
+  final int selectedIndex;
   final void Function(int) onChange;
   const RowButtonWidget({
     required this.labels,
-    this.initialIndex = 0,
+    this.selectedIndex = 0,
     required this.onChange,
     Key? key,
   }) : super(key: key);
@@ -22,7 +22,7 @@ class _RowButtonWidgetState extends State<RowButtonWidget> {
   @override
   void initState() {
     super.initState();
-    selectedIndex = widget.initialIndex;
+    selectedIndex = widget.selectedIndex;
   }
 
   @override
@@ -30,15 +30,16 @@ class _RowButtonWidgetState extends State<RowButtonWidget> {
     return Row(
       children: List.generate(
         widget.labels.length,
-        (index) => index == selectedIndex
-            ? _RowButtonItem.selected(label: widget.labels[index])
-            : GestureDetector(
-                onTap: () {
-                  selectedIndex = index;
-                  widget.onChange(index);
-                  setState(() {});
-                },
-                child: _RowButtonItem(label: widget.labels[index])),
+        (index) => Expanded(
+            child: index == selectedIndex
+                ? _RowButtonItem.selected(label: widget.labels[index])
+                : GestureDetector(
+                    onTap: () {
+                      selectedIndex = index;
+                      widget.onChange(index);
+                      setState(() {});
+                    },
+                    child: _RowButtonItem(label: widget.labels[index]))),
       ),
     );
   }
@@ -63,26 +64,21 @@ class _RowButtonItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            color: selected ? AppColors.white : AppColors.backgroundColor,
-            border: Border(
-              top: BorderSide(
-                color: selected ? AppColors.red : AppColors.gray,
-                width: 5.0,
-              ),
-            ),
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: selected ? AppColors.white : AppColors.backgroundColor,
+        border: Border(
+          top: BorderSide(
+            color: selected ? AppColors.red : AppColors.gray,
+            width: 5.0,
           ),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: selected ? AppColors.red : AppColors.gray,
-            ),
-          ),
+        ),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: selected ? AppColors.red : AppColors.gray,
         ),
       ),
     );
