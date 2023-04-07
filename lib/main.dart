@@ -26,6 +26,7 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+  int selectedIndex = 0;
   bool isAnnouncementSelected = true;
 
   @override
@@ -45,12 +46,14 @@ class MyAppState extends State<MyApp> {
                     delegate: SliverChildListDelegate([
                       SafeArea(
                         child: RowButtonWidget(
+                          selectedIndex: selectedIndex,
                           labels: const [
                             'РАЗМЕЩЕНИЕ СТРОЧНОГО \nОБЪЯВЛЕНИЯ',
                             'РАЗМЕЩЕНИЕ БАННЕРНОЙ \nРЕКЛАМЫ'
                           ],
                           onChange: (updatedIndex) {
                             setState(() {
+                              selectedIndex = updatedIndex;
                               isAnnouncementSelected = updatedIndex == 0;
                             });
                           },
@@ -86,57 +89,67 @@ class MyAppState extends State<MyApp> {
                       const SizedBox(height: 10),
                     ]),
                   ),
-                  if (channels.isNotEmpty)
-                    SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final channel = channels[index];
+                  if (channels.isEmpty)
+                    const SliverToBoxAdapter(
+                      child: Text(
+                        'Channels are empty!!!',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 26,
+                        ),
+                      ),
+                    ),
+                  SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final channel = channels[index];
 
-                        return Column(
-                          key: ValueKey(channel.id),
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                    margin: const EdgeInsets.all(15),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: AppColors.border,
-                                        width: 0.5,
-                                      ),
-                                      borderRadius: BorderRadius.circular(15),
+                      return Column(
+                        key: ValueKey(channel.id),
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                  margin: const EdgeInsets.all(15),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: AppColors.border,
+                                      width: 0.5,
                                     ),
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 5,
-                                    ),
-                                    child: Image.network(
-                                      channel.logo,
-                                      errorBuilder: (_, __, ___) {
-                                        return const FlutterLogo();
-                                      },
-                                    )),
-                                const SizedBox(width: 10),
-                                Text(channel.channelName),
-                              ],
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  child: Image.network(
+                                    channel.logo,
+                                    errorBuilder: (_, __, ___) {
+                                      return const FlutterLogo();
+                                    },
+                                  )),
+                              const SizedBox(width: 10),
+                              Text(channel.channelName),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            '${channel.pricePerLetter}сом',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: AppColors.gray,
+                              fontWeight: FontWeight.bold,
                             ),
-                            const SizedBox(height: 10),
-                            Text(
-                              '${channel.pricePerLetter}сом',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: AppColors.gray,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            DateSelector(
-                              onDateSelected: (pickedDate) {},
-                            ),
-                          ],
-                        );
-                      },
-                      childCount: channels.length,
-                    )),
+                          ),
+                          DateSelector(
+                            onDateSelected: (pickedDate) {},
+                          ),
+                        ],
+                      );
+                    },
+                    childCount: channels.length,
+                  )),
                   if (channels.length > 10)
                     SliverToBoxAdapter(
                       child: ElevatedButton(

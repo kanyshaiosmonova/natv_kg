@@ -3,11 +3,11 @@ import 'package:natv_kg/core/themes/colors.dart';
 
 class RowButtonWidget extends StatefulWidget {
   final List<String> labels;
-  final int initialIndex;
+  final int selectedIndex;
   final void Function(int) onChange;
   const RowButtonWidget({
     required this.labels,
-    this.initialIndex = 0,
+    this.selectedIndex = 0,
     required this.onChange,
     Key? key,
   }) : super(key: key);
@@ -22,7 +22,7 @@ class _RowButtonWidgetState extends State<RowButtonWidget> {
   @override
   void initState() {
     super.initState();
-    selectedIndex = widget.initialIndex;
+    selectedIndex = widget.selectedIndex;
   }
 
   @override
