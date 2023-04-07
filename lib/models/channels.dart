@@ -50,6 +50,9 @@ class Channel {
   static Future<List<Channel>> getChannels() async {
     final response = await http.get(Uri.parse(
         'https://app1.megacom.kg:9090/test_task/api/v1/channel/list'));
+    if (response.statusCode != 200 || response.statusCode != 201) {
+      return [];
+    }
     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
 
     List<Channel> channels = [];
